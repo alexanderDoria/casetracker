@@ -3,6 +3,7 @@ import casetracker from './casetracker.png'
 import './App.css';
 import SearchCases from './SearchCases.js';
 import './AddNewCase.js'
+import './menu.js'
 
 class App extends Component {
   render() {

@@ -36,11 +36,10 @@ export default class searchCases extends Component{
     return(
       
       <div>
-      <ModalApp />
-      <div id="addCase"></div>
-      <br />
-      <br />
+      <div>
       <input type="text" id="myInput" onKeyUp={()=>this.autoSearch()} placeholder="Search..." title="Type anything"/>
+      <ModalApp />
+      </div>
       <table id="myTable">
       <tr className="header">
       <th style={{width:'60%'}}>Suspect</th>

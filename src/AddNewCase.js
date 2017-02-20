@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ButtonToolbar } from 'react-bootstrap';
+import { Button, Modal, ButtonToolbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import Autocomplete from 'react-google-autocomplete';
 
@@ -31,7 +31,6 @@ export const MySmallModal = React.createClass({
 });
 
 export const MyLargeModal = React.createClass({
-  
   render() {
     return (
       <Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-lg">
@@ -101,9 +100,13 @@ export const ModalApp = React.createClass({
 
     return (
       <ButtonToolbar id="addCase">
-        <Button bsStyle="primary" onClick={()=>this.setState({ lgShow: true })}>
-          Add new case
+        <OverlayTrigger placement="left" overlay={
+            <Tooltip id="tooltip"><strong>Add new case</strong></Tooltip>}>
+          <Button bsStyle="success" onClick={()=>this.setState({ lgShow: true })}>
+        
+           <span className="glyphicon glyphicon-plus"></span>
         </Button>
+        </OverlayTrigger>
 
         <MySmallModal show={this.state.smShow} onHide={smClose} />
         <MyLargeModal show={this.state.lgShow} onHide={lgClose} />
