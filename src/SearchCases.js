@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Button, ButtonToolbar } from 'react-bootstrap';
+import { ModalApp } from './AddNewCase.js'
+import Autocomplete from 'react-google-autocomplete';
 
 export default class searchCases extends Component{
     
@@ -32,9 +34,10 @@ export default class searchCases extends Component{
     
   render(){
     return(
-    
+      
       <div>
-      <Button onClick={()=>this.prompt()} bsStyle="primary">Add New Case</Button>
+      <ModalApp />
+      <div id="addCase"></div>
       <br />
       <br />
       <input type="text" id="myInput" onKeyUp={()=>this.autoSearch()} placeholder="Search..." title="Type anything"/>
@@ -77,6 +80,7 @@ export default class searchCases extends Component{
       </tr>
       </table>
       </div>
+      
     );
   }
 }

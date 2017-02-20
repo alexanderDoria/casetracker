@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import casetracker from './casetracker.png'
 import './App.css';
 import SearchCases from './SearchCases.js';
+import './AddNewCase.js'
 
 class App extends Component {
   render() {
@@ -13,7 +14,7 @@ class App extends Component {
         </div>
         
         <p className="App-intro">
-          Get started by tracking cases.
+          View and track cases.
         </p>
       <div><SearchCases /></div>
       </div>

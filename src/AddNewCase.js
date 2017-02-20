@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Modal, ButtonToolbar } from 'react-bootstrap';
+import ReactDOM from 'react-dom';
+import Autocomplete from 'react-google-autocomplete';
 
-const MySmallModal = React.createClass({
+export const MySmallModal = React.createClass({
   render() {
     return (
       <Modal {...this.props} bsSize="small" aria-labelledby="contained-modal-title-sm">
@@ -28,15 +30,48 @@ const MySmallModal = React.createClass({
   }
 });
 
-const MyLargeModal = React.createClass({
+export const MyLargeModal = React.createClass({
+  
   render() {
     return (
       <Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-lg">Modal heading</Modal.Title>
+          <Modal.Title id="contained-modal-title-lg">Enter case information</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <h4>Wrapped Text</h4>
+            <div class="form-group">
+            <Autocomplete
+              style={{width: '90%'}}
+              onPlaceSelected={(place) => {
+                console.log(place);
+              }}
+              types={['(regions)']}
+              componentRestrictions={{country: "us"}}
+            />
+            <label>Case Number: </label>
+            <input type="text" class="form-control" placeholder="Enter Case #" name="caseNumber"/>
+            </div>
+            <div class="form-group">
+            <label>Crime: </label>
+            <input type="text" class="form-control" placeholder="Enter Crime" name="crime"/>
+            </div>
+            <div class="form-group">
+            <label>Location: </label>
+            <input type="text" class="form-control" placeholder="Enter Location" id="location"/>
+            </div>
+            <div class="form-group">
+            <label>Reporting Party: </label>
+            <input type="text" class="form-control" placeholder="Enter Reporting Party" name="reportingParty"/>
+            </div>
+            <div class="form-group">
+            <label>Victim: </label>
+            <input type="text" class="form-control" placeholder="Enter Victim" name="victim"/>
+            </div>
+            <div class="form-group">
+            <label>Suspect: </label>
+            <input type="text" class="form-control" placeholder="Enter Suspect" name="suspect"/>
+            </div>
           <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
           <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
@@ -49,13 +84,14 @@ const MyLargeModal = React.createClass({
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.onHide}>Close</Button>
+          <Button onClick={this.props.onHide}>Save</Button>
         </Modal.Footer>
       </Modal>
     );
   }
 });
 
-const ModalApp = React.createClass({
+export const ModalApp = React.createClass({
   getInitialState() {
     return { smShow: false, lgShow: false };
   },
@@ -64,12 +100,9 @@ const ModalApp = React.createClass({
     let lgClose = () => this.setState({ lgShow: false });
 
     return (
-      <ButtonToolbar>
-        <Button bsStyle="primary" onClick={()=>this.setState({ smShow: true })}>
-          Launch small demo modal
-        </Button>
+      <ButtonToolbar id="addCase">
         <Button bsStyle="primary" onClick={()=>this.setState({ lgShow: true })}>
-          Launch large demo modal
+          Add new case
         </Button>
 
         <MySmallModal show={this.state.smShow} onHide={smClose} />
@@ -79,4 +112,23 @@ const ModalApp = React.createClass({
   }
 });
 
-ReactDOM.render(<ModalApp/>, document.getElementById('mountNode'));
+export const SearchBox = React.createClass({
+  buttonClick: function() {
+    alert(this.refs.searchField.getDOMNode().value);
+  },
+  render: function() {
+    return (
+      <div>     
+        <label htmlFor="searchTextField">
+          Please Insert an address:
+        </label>
+        <br/>
+        <input ref='searchField' id="searchTextField" type="text" size="50"/>
+        <br/>
+        <button onClick={this.buttonClick}>Submit</button>
+      </div>
+    );
+  }
+});
+
+//ReactDOM.render(<ModalApp/>, document.getElementById('mountNode'));
